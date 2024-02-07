@@ -13,6 +13,9 @@ export class PixiAppManager {
             width: 1200,
             height: 800,
         });
+
+        // @ts-ignore
+        globalThis.__PIXI_APP__ = this.m_app;
     };
 }
 
