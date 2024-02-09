@@ -3,7 +3,6 @@ import Game from './Game';
 
 /// Global Class To Handle Game Management
 export class PixiAppManager {
-    private m_game: Game;
 
     constructor() {
         const app = new PIXI.Application({
@@ -15,7 +14,7 @@ export class PixiAppManager {
             height: 800,
         });
 
-        this.m_game = new Game();
+        new Game(app);
 
         // @ts-ignore
         globalThis.__PIXI_APP__ = app;

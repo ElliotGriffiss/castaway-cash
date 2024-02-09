@@ -1,8 +1,12 @@
 import * as PIXI from 'pixi.js'
 
 export class Game {
-    constructor() {
-        console.log("hello worlds");
+    private m_app: PIXI.Application;
+
+    constructor(app: PIXI.Application) {
+        this.m_app = app;
+
+
     }
 }
 
