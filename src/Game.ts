@@ -7,7 +7,7 @@ export class Game {
     constructor(app: PIXI.Application) {
         this.m_app = app;
 
-        const sprite = Sprite.from('assets/goblin.png');
+        const sprite = Sprite.from('assets/game/Sprite1.png');
 
         this.m_app.stage.addChild(sprite);
     }

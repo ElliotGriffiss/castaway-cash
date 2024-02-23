@@ -10,8 +10,8 @@ export class PixiAppManager {
             resolution: window.devicePixelRatio || 1,
             autoDensity: true,
             backgroundColor: "orange",
-            width: 1200,
-            height: 800,
+            width: 480,
+            height: 320,
         });
 
         new Game(app);
