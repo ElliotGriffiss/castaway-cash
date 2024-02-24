@@ -1,4 +1,5 @@
 import { Sprite, Text } from "pixi.js";
+import Button from "./engine/Button/Button";
 
 export class Game {
 
@@ -16,10 +17,20 @@ export class Game {
             fill: 0xff1010,
             align: 'center',
         });
-
         text.position = {x: 125, y: 15};
 
-        global.app.stage.addChild( sprite1, sprite2, text );
+        const button = new Button(
+            ()=> {
+                console.log("Boom!");
+            },
+            {
+                active: global.game.ButtonActive,
+                pressed: global.game.ButtonPressed,
+                inactive: global.game.ButtonInactive
+            }
+        )
+
+        global.app.stage.addChild( sprite1, sprite2, text, button );
     }
 }
 
