@@ -5,7 +5,6 @@ import Animation from "./engine/Animation/Animation";
 export class Game {
 
     constructor() {
-
         const sprite1 = Sprite.from(global.game.Sprite1);
         sprite1.position = {x: 50, y: 50};
 
@@ -37,16 +36,26 @@ export class Game {
     }
 
     private async playAnimation(): Promise<void> {
-        const animation = new Animation({
+        const animation1 = new Animation({
             prefix: "Animation",
             endingFrame: 4,
+            loop: false,
+            speedModifier: 0.05
+        });
+        animation1.position = {x: 50, y: 150}
+
+        const animation2 = new Animation( {
+            prefix: "Animation",
+            endingFrame: 4,
+            loop: true,
             speedModifier: 0.1
         });
-        global.app.stage.addChild( animation );
+        animation2.position = {x: 150, y: 150};
 
-        console.log("start");
-        await animation.play();
-        console.log("stop");
+        global.app.stage.addChild( animation1, animation2 );
+
+        await animation1.play();
+        void animation2.play();
     }
 }
 

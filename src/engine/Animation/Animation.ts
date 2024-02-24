@@ -3,7 +3,8 @@ import {Container, Ticker, Sprite} from 'pixi.js';
 type AnimationConstructor = {
     prefix: string,
     endingFrame: number,
-    speedModifier?: number
+    loop: boolean,
+    speedModifier: number
 }
 
 class Animation extends Container {
@@ -47,20 +48,26 @@ class Animation extends Container {
     }
 
     private _update(deltaTime: number): void {
-        const modifier = (this._settings.speedModifier) ? this._settings.speedModifier : 1;
+        const modifier = this._settings.speedModifier;
         const elapsed = modifier * deltaTime;
         this._currentTime += elapsed;
 
 
-        const  floor = Math.floor(this._currentTime) % (this._settings.endingFrame + 1);
+        const  floor = Math.floor(this._currentTime);
         const frameName =  (`${this._settings.prefix + floor}`);
 
-        if (this._target.texture !== global.game[frameName]) {
-            this._target.texture = global.game[frameName];
-        }
+        console.log(floor);
 
-        if (floor === this._settings.endingFrame) {
-            this.stop();
+        if (floor > this._settings.endingFrame) {
+            if (this._settings.loop) {
+                this._currentTime = 0
+            } else {
+                this.stop();
+            }
+        } else {
+            if (this._target.texture !== global.game[frameName]) {
+                this._target.texture = global.game[frameName];
+            }
         }
     }
 }
