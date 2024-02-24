@@ -1,5 +1,6 @@
 import { Sprite, Text } from "pixi.js";
 import Button from "./engine/Button/Button";
+import Animation from "./engine/Animation/Animation";
 
 export class Game {
 
@@ -28,9 +29,24 @@ export class Game {
                 pressed: global.game.ButtonPressed,
                 inactive: global.game.ButtonInactive
             }
-        )
+        );
+
+        void this.playAnimation();
 
         global.app.stage.addChild( sprite1, sprite2, text, button );
+    }
+
+    private async playAnimation(): Promise<void> {
+        const animation = new Animation({
+            prefix: "Animation",
+            endingFrame: 4,
+            speedModifier: 0.1
+        });
+        global.app.stage.addChild( animation );
+
+        console.log("start");
+        await animation.play();
+        console.log("stop");
     }
 }
 
