@@ -22,6 +22,13 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader'
+                ]
+            },
             // all files with a `.ts`, `.cts`, `.mts` or `.tsx` extension will be handled by `ts-loader`
             {
                 test: /\.([cm]?ts|tsx)$/,
@@ -34,17 +41,16 @@ module.exports = {
                     esModule: false,
                     outputPath: 'assets/',
                 },
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)/,
-                use : [ 'file-loader' ]
-            },
+            }
         ]
     },
     plugins: [
         new CopyPlugin({
             patterns: [
-                {from: "src/assets", to: "assets"},
+                {
+                    from: "src/assets",
+                    to: "assets",
+                }
             ],
         }),
         // Make an index.html from the template
