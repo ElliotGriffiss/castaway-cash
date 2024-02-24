@@ -6,9 +6,9 @@
   "scripts": {
     "lint": "npx eslint",
     "generate-asset-manifest": "AssetManifestGenerator.js",
-    "build-dev:watch": "npx webpack-dev-server",
-    "build-only": "webpack --mode=development",
-    "build-prod": "webpack --mode=production"
+    "build-dev:watch": "AssetManifestGenerator.js npx webpack-dev-server",
+    "build-only": "AssetManifestGenerator.js webpack --mode=development",
+    "build-prod": "AssetManifestGenerator.js webpack --mode=production"
   },
   "author": "Elliot Griffiss",
   "license": "ISC",
