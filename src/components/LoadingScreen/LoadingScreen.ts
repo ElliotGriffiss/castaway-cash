@@ -1,4 +1,4 @@
-import { Assets, Container, Sprite } from 'pixi.js';
+import { Container, Sprite } from 'pixi.js';
 
 class LoadingScreen extends Container {
     constructor() {
