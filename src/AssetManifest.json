@@ -1,0 +1,1 @@
+{"bundles":[{"name":"fonts","assets":[{"name":"arcadeclassic-webfont","src":"assets\\fonts\\arcadeclassic-webfont.woff2"}]},{"name":"game","assets":[{"name":"Sprite1","src":"assets\\game\\Sprite1.png"},{"name":"Sprite2","src":"assets\\game\\Sprite2.png"}]},{"name":"preload","assets":[{"name":"LoadingScreen","src":"assets\\preload\\LoadingScreen.png"}]}]}
