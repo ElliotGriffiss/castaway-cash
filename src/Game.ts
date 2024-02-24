@@ -11,11 +11,11 @@ export class Game {
         const sprite2 = Sprite.from(global.game['Sprite2']);
         sprite2.position = {x: 150, y: 50};
 
-        const text = new Text('This is a PixiJS text', {
+        const text = new Text('PIXI JS Template', {
             fontFamily: 'arcadeclassic-webfont',
             fontSize: 24,
-            fill: 0xff1010,
-            align: 'center',
+            fill: "#FFFFFF",
+            align: 'center'
         });
         text.position = {x: 125, y: 15};
 
