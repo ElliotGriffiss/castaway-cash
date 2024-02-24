@@ -47,8 +47,6 @@ export class PixiAppManager {
     }
 
     private async _load(): Promise<void> {
-        let promises =
-
         await Promise.all( [
             global.game = await PIXI.Assets.loadBundle("game"),
             ...( AssetsManifest.bundles[0].assets.map(async ({name})=> {
