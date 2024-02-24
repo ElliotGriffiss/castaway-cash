@@ -5,10 +5,10 @@
   "private": true,
   "scripts": {
     "lint": "npx eslint",
-    "generate-asset-manifest": "AssetManifestGenerator.js",
-    "build-dev:watch": "AssetManifestGenerator.js & npx webpack-dev-server",
-    "build-only": "AssetManifestGenerator.js & webpack --mode=development",
-    "build-prod": "AssetManifestGenerator.js & webpack --mode=production"
+    "generate-asset-manifest": "node AssetManifestGenerator.js",
+    "build-dev:watch": "node AssetManifestGenerator.js & npx webpack-dev-server",
+    "build-only": "node AssetManifestGenerator.js & webpack --mode=development",
+    "build-prod": "node AssetManifestGenerator.js & webpack --mode=production"
   },
   "author": "Elliot Griffiss",
   "license": "ISC",
