@@ -13,9 +13,9 @@ class Button extends Container {
     private readonly _pressedSprite : Sprite;
     private readonly _inactiveSprite: Sprite;
 
-    private _buttonPayload:Function;
+    private readonly _buttonPayload: () => void;
 
-    constructor(buttonPayload:Function, constructor: buttonConstructor) {
+    constructor(buttonPayload:() => void, constructor: buttonConstructor) {
         super();
         this._buttonPayload = buttonPayload;
 
@@ -32,7 +32,7 @@ class Button extends Container {
         this._pressedSprite.visible = false;
         this._inactiveSprite.visible = false;
 
-        this.addChild(this._activeSprite, this._pressedSprite, this._inactiveSprite)
+        this.addChild(this._activeSprite, this._pressedSprite, this._inactiveSprite);
 
         this.on("pointerup", this._onButtonReleased, this);
         this.on("pointerdown", this._onButtonPressed, this);

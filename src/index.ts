@@ -33,4 +33,4 @@ export class PixiAppManager {
     }
 }
 
-let TemplateGame = new PixiAppManager();
+new PixiAppManager();

@@ -15,6 +15,7 @@
     "plugins": [
         "@typescript-eslint"
     ],
+    "ignorePatterns": ["global.d.ts"],
     "rules": {
         "semi": ["error", "always"]
     }
