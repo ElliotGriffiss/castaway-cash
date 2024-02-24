@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
     entry: './src/index.ts',
@@ -58,6 +59,7 @@ module.exports = {
             template: 'src/index.ejs',
             hash: true,
             minify: false
-        })
+        }),
+        new ESLintPlugin()
     ]
 };

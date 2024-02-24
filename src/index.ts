@@ -20,7 +20,7 @@ export class PixiAppManager {
         globalThis.__PIXI_APP__ = app;
 
         void this._setup();
-    };
+    }
 
     private async _setup(): Promise<void> {
         const loader = new Loader();
@@ -28,9 +28,9 @@ export class PixiAppManager {
         await loader._preload();
         loader.createLoadingScreen();
         await loader.load();
-        const game = new Game();
+        new Game();
         loader.destroyLoadingScreen();
     }
 }
 
-var TemplateGame = new PixiAppManager();
+let TemplateGame = new PixiAppManager();
