@@ -1,15 +1,20 @@
-import * as PIXI from 'pixi.js'
-import {Sprite} from "pixi.js";
+import { Sprite, Text } from "pixi.js";
 
 export class Game {
-    private m_app: PIXI.Application;
 
-    constructor(app: PIXI.Application) {
-        this.m_app = app;
+    constructor() {
 
-        const sprite = Sprite.from('assets/game/Sprite1.png');
+        const sprite1 = Sprite.from(global.game.Sprite1);
+        const sprite2 = Sprite.from(global.game['Sprite2']);
 
-        this.m_app.stage.addChild(sprite);
+        const text = new Text('This is a PixiJS text', {
+            fontFamily: 'arcadeclassic-webfont',
+            fontSize: 24,
+            fill: 0xff1010,
+            align: 'center',
+        });
+
+        global.app.stage.addChild( sprite1, sprite2, text );
     }
 }
 
