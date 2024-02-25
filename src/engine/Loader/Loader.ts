@@ -2,7 +2,7 @@ import {Assets} from "pixi.js";
 import FontFaceObserver from "fontfaceobserver";
 
 import AssetsManifest from "../../AssetManifest.json";
-import LoadingScreen from "../../components/LoadingScreen/LoadingScreen";
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
 
 class Loader {
     private _loadingScreen: LoadingScreen = null;
@@ -20,7 +20,9 @@ class Loader {
 
     async load(): Promise<void> {
         await Promise.all( [
-            global.game = await Assets.loadBundle("game"),
+            global.game = await Assets.loadBundle("game", (progress)=> {
+                this._loadingScreen.updateProgress(progress);
+            }),
             ...( AssetsManifest.bundles[0].assets.map(async ({name})=> {
                     const font = new FontFaceObserver(name);
                     return await font.load().then(function () {
