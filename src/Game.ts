@@ -44,10 +44,8 @@ export class Game {
         const button = new Button(
             async ()=> {
                 button.isActive = false;
-                console.log("play");
                 await animation1.play();
                 button.isActive = true;
-                console.log("stop");
             },
             {
                 active: global.game.ButtonActive,
