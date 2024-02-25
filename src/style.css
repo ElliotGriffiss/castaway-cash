@@ -1,6 +1,24 @@
+body {
+    margin: 0px;
+}
+
 @font-face {
-    font-family: 'arcadeclassic-webfont';
-    src: url('assets/fonts/arcadeclassic-webfont.woff2') format('woff2');
+    font-family: '04b30';
+    src: url('assets/fonts/04b30.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'arcadeclassic';
+    src: url('assets/fonts/arcadeclassic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'minecraftmedium';
+    src: url('assets/fonts/minecraftmedium.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }

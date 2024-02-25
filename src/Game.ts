@@ -11,17 +11,33 @@ export class Game {
         const sprite2 = Sprite.from(global.game['Sprite2']);
         sprite2.position = {x: 150, y: 50};
 
-        const text = new Text('PIXI JS Template', {
-            fontFamily: 'arcadeclassic-webfont',
+        const text1 = new Text('PIXI JS Template', {
+            fontFamily: '04b30',
             fontSize: 24,
             fill: "#FFFFFF",
             align: 'center'
         });
-        text.position = {x: 125, y: 15};
+        text1.position = {x: 70, y: 15};
+
+        const text2 = new Text('Text 2', {
+            fontFamily: 'arcadeclassic',
+            fontSize: 24,
+            fill: "#FFFFFF",
+            align: 'center'
+        });
+        text2.position = {x: 300, y: 50};
+
+        const text3 = new Text('Text 3', {
+            fontFamily: 'minecraftmedium',
+            fontSize: 24,
+            fill: "#FFFFFF",
+            align: 'center'
+        });
+        text3.position = {x: 300, y: 80};
 
         void this.playAnimations();
 
-        global.app.stage.addChild( sprite1, sprite2, text );
+        global.app.stage.addChild( sprite1, sprite2, text1, text2, text3 );
     }
 
     private async playAnimations(): Promise<void> {
