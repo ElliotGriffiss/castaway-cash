@@ -52,11 +52,8 @@ class Animation extends Container {
         const elapsed = modifier * deltaTime;
         this._currentTime += elapsed;
 
-
         const  floor = Math.floor(this._currentTime);
         const frameName =  (`${this._settings.prefix + floor}`);
-
-        console.log(floor);
 
         if (floor > this._settings.endingFrame) {
             if (this._settings.loop) {
