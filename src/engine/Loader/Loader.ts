@@ -22,9 +22,13 @@ class Loader {
         await Promise.all( [
             global.game = await Assets.loadBundle("game"),
             ...( AssetsManifest.bundles[0].assets.map(async ({name})=> {
-                const font = new FontFaceObserver(name);
-                return font.load();
-            }) )
+                    const font = new FontFaceObserver(name);
+                    return await font.load().then(function () {
+                    }).catch(function () {
+                        console.error(`${name} has failed to load.`);
+                    });
+                })
+            )
         ]);
     }
 
