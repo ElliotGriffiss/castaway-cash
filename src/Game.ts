@@ -42,8 +42,12 @@ export class Game {
         animation2.position = {x: 150, y: 150};
 
         const button = new Button(
-            ()=> {
-                void animation1.play();
+            async ()=> {
+                button.isActive = false;
+                console.log("play");
+                await animation1.play();
+                button.isActive = true;
+                console.log("stop");
             },
             {
                 active: global.game.ButtonActive,
