@@ -57,7 +57,7 @@ class Animation extends Container {
 
         if (floor > this._settings.endingFrame) {
             if (this._settings.loop) {
-                this._currentTime = 0
+                this._currentTime = 0;
             } else {
                 this.stop();
             }

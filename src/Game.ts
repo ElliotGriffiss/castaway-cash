@@ -47,7 +47,7 @@ export class Game {
             loop: false,
             speedModifier: 0.05
         });
-        animation1.position = {x: 50, y: 150}
+        animation1.position = {x: 50, y: 150};
 
         const animation2 = new Animation( {
             prefix: "Animation",
@@ -73,7 +73,6 @@ export class Game {
 
         global.app.stage.addChild( animation1, animation2, button );
 
-        await animation1.play();
         void animation2.play();
     }
 }
