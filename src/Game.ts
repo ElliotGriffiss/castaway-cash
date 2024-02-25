@@ -19,23 +19,12 @@ export class Game {
         });
         text.position = {x: 125, y: 15};
 
-        const button = new Button(
-            ()=> {
-                console.log("Boom!");
-            },
-            {
-                active: global.game.ButtonActive,
-                pressed: global.game.ButtonPressed,
-                inactive: global.game.ButtonInactive
-            }
-        );
+        void this.playAnimations();
 
-        void this.playAnimation();
-
-        global.app.stage.addChild( sprite1, sprite2, text, button );
+        global.app.stage.addChild( sprite1, sprite2, text );
     }
 
-    private async playAnimation(): Promise<void> {
+    private async playAnimations(): Promise<void> {
         const animation1 = new Animation({
             prefix: "Animation",
             endingFrame: 4,
@@ -52,7 +41,19 @@ export class Game {
         });
         animation2.position = {x: 150, y: 150};
 
-        global.app.stage.addChild( animation1, animation2 );
+        const button = new Button(
+            ()=> {
+                void animation1.play();
+            },
+            {
+                active: global.game.ButtonActive,
+                pressed: global.game.ButtonPressed,
+                inactive: global.game.ButtonInactive
+            }
+        );
+        button.position = {x:35, y: 250};
+
+        global.app.stage.addChild( animation1, animation2, button );
 
         await animation1.play();
         void animation2.play();
