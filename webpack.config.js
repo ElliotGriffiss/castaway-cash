@@ -51,6 +51,11 @@ module.exports = {
                 {
                     from: "src/assets",
                     to: "assets",
+                    globOptions: {
+                        ignore: [
+                            '**/src/assets/fonts',
+                        ]
+                    }
                 }
             ],
         }),
