@@ -1,6 +1,6 @@
 import {Container, Ticker, Sprite} from 'pixi.js';
 
-type AnimationConstructor = {
+type AnimationSettings = {
     prefix: string,
     endingFrame: number,
     loop: boolean,
@@ -11,13 +11,13 @@ class Animation extends Container {
     private _ticker: Ticker = null;
     private readonly _target: Sprite = null;
 
-    private _settings: AnimationConstructor = null;
+    private _settings: AnimationSettings = null;
 
     private _resolve: () => void = null;
     private _currentTime: number;
     private _playing: boolean = false;
 
-    constructor(constructor: AnimationConstructor) {
+    constructor(constructor: AnimationSettings) {
         super();
         this._ticker = Ticker.shared;
         this._settings = constructor;
