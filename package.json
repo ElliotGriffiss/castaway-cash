@@ -1,7 +1,7 @@
 {
-  "name": "pixi-template",
+  "name": "castaway-cash",
   "version": "1.0.0",
-  "description": "A Pixi Template",
+  "description": "Castaway Cash is a \\\"3 from 9\\\" instant win game",
   "private": true,
   "scripts": {
     "lint": "npx eslint src",
