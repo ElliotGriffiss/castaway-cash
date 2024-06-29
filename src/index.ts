@@ -12,8 +12,8 @@ export class PixiAppManager {
             resolution: window.devicePixelRatio || 1,
             autoDensity: true,
             backgroundColor: "#000000",
-            width: 480,
-            height: 320,
+            width: 1369,
+            height: 855,
         });
 
         global.app = app;
@@ -29,7 +29,7 @@ export class PixiAppManager {
         loader.createLoadingScreen();
         await loader.load();
         new Game();
-        loader.destroyLoadingScreen();
+        //loader.destroyLoadingScreen();
     }
 }
 
