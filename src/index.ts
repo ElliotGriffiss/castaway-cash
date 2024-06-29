@@ -29,7 +29,7 @@ export class PixiAppManager {
         loader.createLoadingScreen();
         await loader.load();
         new Game();
-        //loader.destroyLoadingScreen();
+        loader.destroyLoadingScreen();
     }
 }
 

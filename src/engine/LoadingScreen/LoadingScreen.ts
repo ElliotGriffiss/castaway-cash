@@ -16,14 +16,14 @@ class LoadingScreen extends Container {
             maxWidth: 145,
             height: 5
         });
-        this._bar.position = {x:1369 / 2, y:855 / 2};
+        this._bar.position = {x:168, y:177.5};
 
         const backgroundSprite = Sprite.from(global.preload.LoadingScreen);
         backgroundSprite.width = 1369;
         backgroundSprite.height = 855;
 
         const loadingBarBackground = Sprite.from(global.preload.LoadingBarBackground);
-        loadingBarBackground.position = {x:1369 / 2, y:855 / 2};
+        loadingBarBackground.position = {x: 240, y: 180};
         loadingBarBackground.anchor.set(0.5, 0.5);
 
         this.addChild(backgroundSprite, loadingBarBackground, this._bar);
