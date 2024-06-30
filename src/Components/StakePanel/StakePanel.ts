@@ -5,10 +5,10 @@ import Button from "../../engine/Button/Button"
 
 class StakePanel extends Container{
     private _game: Game = null;
-    private _stakeText: BitmapText = null;
-    private _increaseStakeButton: Button = null;
-    private _decreaseStakeButton: Button = null;
-
+    private readonly _stakeText: BitmapText = null;
+    private readonly _increaseStakeButton: Button = null;
+    private readonly _decreaseStakeButton: Button = null;
+    private readonly _playButton: Button = null;
 
     private readonly _stakes: number[] = null;
     private _currentStakeIndex: number = 0;
@@ -55,6 +55,14 @@ class StakePanel extends Container{
         const panelBackgroundBottom = Sprite.from(global.game.ui.textures['panelVS3.png']);
         panelBackgroundBottom.y = 420;
 
+        this._playButton = new Button(()=> {this._onPlayButtonPressed()}, {
+            active: global.game.language.textures['playButton.psd'],
+            pressed: global.game.language.textures['playButton.psd'],
+            inactive: global.game.language.textures['playButton.psd']
+        });
+        this._playButton.x = 60;
+        this._playButton.y = 455;
+
         this.addChild(
             panelBackgroundTop,
             panelBackgroundMid,
@@ -62,7 +70,8 @@ class StakePanel extends Container{
             chooseBet,
             this._stakeText,
             this._increaseStakeButton,
-            this._decreaseStakeButton
+            this._decreaseStakeButton,
+            this._playButton
         );
     }
 
@@ -90,6 +99,7 @@ class StakePanel extends Container{
 
     private _onPlayButtonPressed(): void {
         this.visible = false;
+        //TODO: PLAY GAME
     }
 }
 

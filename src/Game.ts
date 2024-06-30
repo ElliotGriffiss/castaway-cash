@@ -6,24 +6,27 @@ import Animation from "./engine/Animation/Animation";
 import Background from "./Components/Background/Background";
 import Foreground from "./Components/Foreground/Foreground";
 import StakePanel from "./Components/StakePanel/StakePanel";
+import MainMenu from "./Components/MainMenu/MainMenu";
 
 import settings from './app.json';
 
 export class Game {
     private _stake: number = 1;
-
+    private _stakePanel: StakePanel = null;
+    private _mainMenu: MainMenu = null;
 
     constructor() {
-
         const background = new Background();
         const foreground = new Foreground();
 
-        const stakePanel = new StakePanel(this, settings.stakes);
+        this._stakePanel = new StakePanel(this, settings.stakes);
+        this._mainMenu = new MainMenu();
 
         global.app.stage.addChild(
             background,
             foreground,
-            stakePanel,
+            this._stakePanel,
+            this._mainMenu
         );
     }
 
