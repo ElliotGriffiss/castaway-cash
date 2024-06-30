@@ -5,11 +5,14 @@ class Background extends Container {
         super();
 
         const backgroundSprite = Sprite.from(global.game.background);
-
         backgroundSprite.width = 1369;
         backgroundSprite.height = 855;
 
-        this.addChild(backgroundSprite);
+        const islandMiddle = Sprite.from(global.game.backgroundElements.textures['islandMiddle.png']);
+        islandMiddle.x = 60;
+        islandMiddle.y = 192;
+
+        this.addChild(backgroundSprite, islandMiddle);
     }
 }
 
