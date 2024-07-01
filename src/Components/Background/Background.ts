@@ -12,7 +12,11 @@ class Background extends Container {
         islandMiddle.x = 60;
         islandMiddle.y = 192;
 
-        this.addChild(backgroundSprite, islandMiddle);
+        const islandBoarder = Sprite.from(global.game.chest.textures['waterRipple.png']);
+        islandBoarder.x = 17;
+        islandBoarder.y = 450;
+
+        this.addChild(backgroundSprite, islandBoarder, islandMiddle);
     }
 }
 
