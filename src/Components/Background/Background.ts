@@ -1,4 +1,5 @@
 import { Container, Sprite } from 'pixi.js';
+import WaterRipple from "../WaterRipple/WaterRipple";
 
 class Background extends Container {
     constructor() {
@@ -8,15 +9,13 @@ class Background extends Container {
         backgroundSprite.width = 1369;
         backgroundSprite.height = 855;
 
+        const waterRipple = new WaterRipple();
+
         const islandMiddle = Sprite.from(global.game.backgroundElements.textures['islandMiddle.png']);
         islandMiddle.x = 60;
         islandMiddle.y = 192;
 
-        const islandBoarder = Sprite.from(global.game.chest.textures['waterRipple.png']);
-        islandBoarder.x = 17;
-        islandBoarder.y = 450;
-
-        this.addChild(backgroundSprite, islandBoarder, islandMiddle);
+        this.addChild(backgroundSprite, waterRipple, islandMiddle);
     }
 }
 

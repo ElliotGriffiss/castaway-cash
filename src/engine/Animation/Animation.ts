@@ -2,6 +2,7 @@ import {Container, Ticker, Sprite} from 'pixi.js';
 
 type AnimationSettings = {
     prefix: string,
+    suffix: string,
     endingFrame: number,
     loop: boolean,
     speedModifier: number
@@ -22,7 +23,9 @@ class Animation extends Container {
         this._ticker = Ticker.shared;
         this._settings = constructor;
 
-        const startingFrame =  (`${constructor.prefix}0`);
+        const startingFrame =  (`${constructor.prefix}0${constructor.suffix}`);
+        console.log(global.game);
+        console.log(startingFrame);
         this._target = new Sprite(global.game[startingFrame]);
 
         this.addChild(this._target);
@@ -53,7 +56,7 @@ class Animation extends Container {
         this._currentTime += elapsed;
 
         const  floor = Math.floor(this._currentTime);
-        const frameName =  (`${this._settings.prefix + floor}`);
+        const frameName =  (`${this._settings.prefix + floor + this._settings.suffix}`);
 
         if (floor > this._settings.endingFrame) {
             if (this._settings.loop) {

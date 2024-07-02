@@ -1,4 +1,9 @@
 import * as PIXI from 'pixi.js';
+
+import {gsap} from 'gsap';
+import { PixiPlugin } from "gsap/PixiPlugin";
+gsap.registerPlugin(PixiPlugin);
+
 import Game from './Game';
 import "./style.css";
 
@@ -18,6 +23,8 @@ export class PixiAppManager {
 
         global.app = app;
         globalThis.__PIXI_APP__ = app;
+
+        PixiPlugin.registerPIXI(app);
 
         void this._setup();
     }

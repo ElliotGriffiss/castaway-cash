@@ -99,7 +99,7 @@ class StakePanel extends Container{
 
     private _onPlayButtonPressed(): void {
         this.visible = false;
-        //TODO: PLAY GAME
+        this._game.onPlayButtonPressed();
     }
 }
 

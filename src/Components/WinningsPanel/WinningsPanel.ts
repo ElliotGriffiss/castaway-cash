@@ -1,13 +1,18 @@
 import { Container, Sprite, BitmapText } from 'pixi.js';
 import Button from "../../engine/Button/Button";
+import Game from "../../Game";
 
-class MainMenu extends Container {
+class WinningsPanel extends Container {
     private readonly _winAmountText: BitmapText = null;
     private readonly _playButton: Button = null;
     private readonly _setBetButton: Button = null;
 
-    constructor() {
+    private _game: Game = null;
+
+    constructor(game: Game) {
         super();
+        this._game = game;
+        this.visible = false;
 
         const backgroundSprite = Sprite.from(global.game.ui.textures['panelEndMessage.psd']);
         backgroundSprite.x = 405;
@@ -33,7 +38,7 @@ class MainMenu extends Container {
         this._playButton.x = 420;
         this._playButton.y = 190;
 
-        this._setBetButton = new Button(()=> {this._onPlayButtonPressed()}, {
+        this._setBetButton = new Button(()=> {this._onSetBetButtonPressed()}, {
             active: global.game.language.textures['changeBetButton.psd'],
             pressed: global.game.language.textures['changeBetButton.psd'],
             inactive: global.game.language.textures['changeBetButton.psd']
@@ -50,8 +55,13 @@ class MainMenu extends Container {
 
     private _onPlayButtonPressed(): void {
         this.visible = false;
-        //TODO: PLAY GAME
+        this._game.onPlayButtonPressed();
+    }
+
+    private _onSetBetButtonPressed(): void {
+        this.visible = false;
+        this._game.onChangeBetButtonPressed();
     }
 }
 
-export default MainMenu;
+export default WinningsPanel;
