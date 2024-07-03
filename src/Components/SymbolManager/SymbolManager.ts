@@ -27,9 +27,9 @@ class SymbolManager extends Container {
         });
     }
 
-    async updateSymbols(values: number[]): Promise<void> {
+    async updateSymbols(values: number[], winningIndexes: number[]): Promise<void> {
         await Promise.all( this._symbols.map((symbol, index) => {
-            return symbol.setupSymbol(values[index], true);
+            return symbol.setupSymbol(values[index], winningIndexes.includes(index));
         }));
     }
 }

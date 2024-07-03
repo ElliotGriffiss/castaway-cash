@@ -13,7 +13,7 @@ import settings from './app.json';
 
 export class Game {
     private _stake: number = 1;
-    private _credit: number = 10;
+    private _credit: number = 120;
 
     private readonly _stakePanel: StakePanel = null;
     private readonly _winningsPanel: WinningsPanel = null;
@@ -56,7 +56,12 @@ export class Game {
     }
 
     onPlayButtonPressed(): void {
-        void this._playGame();
+        if (this._credit >= this._stake) {
+            void this._playGame();
+        } else {
+            void this._stakePanel.show();
+            console.log("not Enough Credit");
+        }
     }
 
     onRevealAllSymbolsPressed(): void {
@@ -66,6 +71,8 @@ export class Game {
     async _playGame(): Promise<void> {
         // deduct credit;
         this._credit -= this._stake;
+        console.log("Credit: "+ this._credit);
+
         this._winningsPanel.visible = false;
 
         // close all chests
@@ -73,9 +80,34 @@ export class Game {
 
         void this._revealAllPanel.show();
 
-        // const data = generateResults();
+        const randomIndex = Math.floor(Math.random() * settings.scenarioData.length);
+        const betResult = settings.scenarioData[randomIndex];
 
-        await this._symbolManager.updateSymbols([20, 12, 8, 6, 6, 2, 2, 1, 1]);
+        const prizes = betResult.prizeIndexes.map((index)=> {
+            return settings.prizeTable[index];
+        })
+
+        await this._symbolManager.updateSymbols(prizes, betResult.winningIndexes);
+        let winTotal = 0;
+        const countedWinValues: number[] = [];
+
+        // works out how much the player has won.
+        betResult.winningIndexes.map((value) => {
+            if (!countedWinValues.includes(prizes[value])) {
+                countedWinValues.push(prizes[value]);
+            }
+        });
+
+        // Calculates the win total.
+        countedWinValues.forEach((value)=> {
+           winTotal+= value;
+        });
+
+        this._winningsPanel.setWinAmount(winTotal);
+        console.log("You Won: "+ winTotal);
+
+        this._credit+= winTotal;
+        console.log("Credit: "+ this._credit);
 
         this._revealAllPanel.visible = false;
         await this._winningsPanel.show();
