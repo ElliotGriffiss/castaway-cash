@@ -35,7 +35,7 @@ class Loader {
     }
 
     destroyLoadingScreen(): void {
-        //this._loadingScreen.destroy();
+        this._loadingScreen.destroy();
     }
 }
 
