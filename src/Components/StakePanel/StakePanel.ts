@@ -82,6 +82,7 @@ class StakePanel extends Container{
         panelBackgroundBottom.y = 420;
 
         this._playButton = new Button(()=> {this._onPlayButtonPressed()}, {
+            hideActive: true,
             buttonText: "PLAY",
             textStyle: {
                 fontName: 'skranji-white-interface-export',

@@ -13,7 +13,7 @@ import settings from './app.json';
 
 export class Game {
     private _stake: number = 1;
-    private _credit: number = 120;
+    private _credit: number = 10;
 
     private readonly _stakePanel: StakePanel = null;
     private readonly _winningsPanel: WinningsPanel = null;

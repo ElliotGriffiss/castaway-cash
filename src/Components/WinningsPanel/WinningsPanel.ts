@@ -35,6 +35,7 @@ class WinningsPanel extends Container {
         this._winAmountText.y = 120;
 
         this._playButton = new Button(()=> {this._onPlayButtonPressed()}, {
+            hideActive: true,
             buttonText: "PLAY",
             textStyle: {
                 fontName: 'skranji-white-interface-export',
@@ -49,6 +50,7 @@ class WinningsPanel extends Container {
         this._playButton.y = 190;
 
         this._setBetButton = new Button(()=> {this._onSetBetButtonPressed()}, {
+            hideActive: true,
             buttonText: "SET BET",
             textStyle: {
                 fontName: 'skranji-white-interface-export',
