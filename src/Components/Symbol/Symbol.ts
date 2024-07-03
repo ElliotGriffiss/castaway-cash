@@ -1,5 +1,6 @@
 import {Container, AnimatedSprite, BitmapText, Sprite, Rectangle, Graphics} from 'pixi.js';
 import gsap from 'gsap';
+import {Howl} from 'howler';
 
 class Symbol extends Container {
     private readonly _textContainer: Container = null;
@@ -10,6 +11,8 @@ class Symbol extends Container {
     private readonly _chestAnimation: AnimatedSprite = null;
     private readonly _chestGlow: Sprite = null;
     private readonly _chestGlowTween: gsap.core.Tween = null
+
+    private readonly _chestOpenSound: Howl = null;
 
     private _isOpenable: boolean = false;
     private _isWin: boolean = false;
@@ -64,6 +67,8 @@ class Symbol extends Container {
         this.cursor = 'Pointer';
         this.on("pointerup", this.revealSymbol, this);
 
+        this._chestOpenSound = global.game.SND_Chest_Open;
+
         this.addChild(this._chestAnimation, this._textContainer, this._chestGlow)
     }
 
@@ -92,9 +97,14 @@ class Symbol extends Container {
         if (this._isOpenable) {
             this._isOpenable = false;
 
-            this._chestAnimation.play()
+            this._chestAnimation.play();
+            this._chestOpenSound.play();
 
             await new Promise(resolve => setTimeout(resolve, 200));
+
+            this._winText.visible = this._isWin;
+            this._loseText.visible = !this._isWin;
+            await this._textTween.restart();
 
             if (this._isWin) {
                 this._chestGlow.visible = true;
@@ -104,9 +114,6 @@ class Symbol extends Container {
     }
 
     async revealComplete(): Promise<void> {
-        this._winText.visible = this._isWin;
-        this._loseText.visible = !this._isWin;
-        await this._textTween.restart();
         this._resolve();
     }
 }

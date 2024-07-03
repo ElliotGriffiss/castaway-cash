@@ -1,5 +1,6 @@
 import { Container, Sprite, BitmapText } from 'pixi.js';
 import gsap from 'gsap';
+import {Howl} from 'howler';
 
 import Button from "../../engine/Button/Button";
 import Game from "../../Game";
@@ -10,6 +11,7 @@ class WinningsPanel extends Container {
     private readonly _setBetButton: Button = null;
 
     private readonly _showTween: gsap.core.Tween = null;
+    private readonly _buttonClick: Howl = null;
 
     private _game: Game = null;
 
@@ -65,6 +67,7 @@ class WinningsPanel extends Container {
         this._setBetButton.y = 190;
 
         this._showTween = gsap.fromTo(this, {pixi: {positionY: -300}}, {pixi: {positionY: 0}, duration: 0.75, ease: "sine.out", paused: true});
+        this._buttonClick = global.game.SND_Click;
 
         this.addChild(backgroundSprite, winMessageSprite, this._winAmountText, this._playButton, this._setBetButton);
     }
@@ -80,11 +83,13 @@ class WinningsPanel extends Container {
     }
 
     private _onPlayButtonPressed(): void {
+        this._buttonClick.play();
         this.visible = false;
         this._game.onPlayButtonPressed();
     }
 
     private _onSetBetButtonPressed(): void {
+        this._buttonClick.play();
         this.visible = false;
         this._game.onChangeBetButtonPressed();
     }

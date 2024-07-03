@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import {Howl} from 'howler';
 
 import SymbolManager from "./Components/SymbolManager/SymbolManager";
 import Background from "./Components/Background/Background";
@@ -21,6 +22,9 @@ export class Game {
     private readonly _revealAllPanel: revealAllPanel = null;
     private readonly _winUpToPanel: WinUpToPanel = null;
 
+    private readonly _winSound: Howl = null;
+    private readonly _loseSound: Howl = null;
+
     constructor() {
         const background = new Background();
         const foreground = new Foreground();
@@ -42,6 +46,9 @@ export class Game {
             this._revealAllPanel,
             this._winningsPanel
         );
+
+        this._loseSound = global.game.SND_End_Game_Lose;
+        this._winSound = global.game.SND_End_Game_Win;
 
         void this._stakePanel.show();
     }
@@ -110,6 +117,13 @@ export class Game {
         console.log("Credit: "+ this._credit);
 
         this._revealAllPanel.visible = false;
+
+        if (betResult.winner) {
+            this._winSound.play();
+        } else {
+            this._loseSound.play();
+        }
+
         await this._winningsPanel.show();
 
         return Promise.resolve()

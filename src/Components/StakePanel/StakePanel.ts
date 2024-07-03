@@ -1,5 +1,6 @@
 import {Container, Sprite, BitmapText} from "pixi.js";
 import gsap from 'gsap';
+import {Howl} from 'howler';
 
 import Game from "../../Game";
 import Button from "../../engine/Button/Button"
@@ -12,6 +13,7 @@ class StakePanel extends Container{
     private readonly _playButton: Button = null;
 
     private readonly _showTween: gsap.core.Tween = null;
+    private readonly _buttonClick: Howl = null;
 
     private readonly _stakes: number[] = null;
     private _currentStakeIndex: number = 0;
@@ -97,6 +99,7 @@ class StakePanel extends Container{
         this._playButton.y = 455;
 
         this._showTween = gsap.fromTo(this, {pixi: {positionX: -360}}, {pixi: {positionX: 0}, duration: 0.75, ease: "sine.out", paused: true});
+        this._buttonClick = global.game.SND_Click;
 
         this.addChild(
             panelBackgroundTop,
@@ -123,6 +126,7 @@ class StakePanel extends Container{
             this._currentStakeIndex = this._stakes.length-1;
         }
 
+        this._buttonClick.play();
         this._stakeText.text = (`$${this._stakes[this._currentStakeIndex]}`);
         this._game.updateStake(this._stakes[this._currentStakeIndex]);
     }
@@ -134,11 +138,13 @@ class StakePanel extends Container{
             this._currentStakeIndex = 0;
         }
 
+        this._buttonClick.play();
         this._stakeText.text = (`$${this._stakes[this._currentStakeIndex]}`)
         this._game.updateStake(this._stakes[this._currentStakeIndex]);
     }
 
     private _onPlayButtonPressed(): void {
+        this._buttonClick.play();
         this.visible = false;
         this._game.onPlayButtonPressed();
     }

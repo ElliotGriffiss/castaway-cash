@@ -1,7 +1,11 @@
 import * as PIXI from 'pixi.js';
 
+import { extensions } from 'pixi.js';
 import {gsap} from 'gsap';
 import { PixiPlugin } from "gsap/PixiPlugin";
+// @ts-ignore
+import HowlerLoaderParser from 'howler-pixi-loader-middleware';
+
 gsap.registerPlugin(PixiPlugin);
 
 import Game from './Game';
@@ -25,7 +29,7 @@ export class PixiAppManager {
         globalThis.__PIXI_APP__ = app;
 
         PixiPlugin.registerPIXI(app);
-
+        extensions.add(HowlerLoaderParser);
         void this._setup();
     }
 
