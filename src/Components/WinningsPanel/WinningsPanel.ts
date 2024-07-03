@@ -35,17 +35,29 @@ class WinningsPanel extends Container {
         this._winAmountText.y = 120;
 
         this._playButton = new Button(()=> {this._onPlayButtonPressed()}, {
-            active: {texture: global.game.language.textures['playButton.psd']},
-            pressed: {texture: global.game.language.textures['playButton.psd']},
-            inactive: {texture: global.game.language.textures['playButton.psd']}
+            buttonText: "PLAY",
+            textStyle: {
+                fontName: 'skranji-white-interface-export',
+                fontSize: 42,
+                align: 'center',
+            },
+            active: {texture: global.game.ui.textures['buttonBackground.png']},
+            pressed: {texture: global.game.ui.textures['buttonLighten.png']},
+            inactive: {texture: global.game.ui.textures['buttonDarken.png']}
         });
         this._playButton.x = 420;
         this._playButton.y = 190;
 
         this._setBetButton = new Button(()=> {this._onSetBetButtonPressed()}, {
-            active: {texture: global.game.language.textures['changeBetButton.psd']},
-            pressed: {texture: global.game.language.textures['changeBetButton.psd']},
-            inactive: {texture: global.game.language.textures['changeBetButton.psd']}
+            buttonText: "SET BET",
+            textStyle: {
+                fontName: 'skranji-white-interface-export',
+                fontSize: 42,
+                align: 'center',
+            },
+            active: {texture: global.game.ui.textures['buttonBackground.png']},
+            pressed: {texture: global.game.ui.textures['buttonLighten.png']},
+            inactive: {texture: global.game.ui.textures['buttonDarken.png']}
         });
         this._setBetButton.x = 690;
         this._setBetButton.y = 190;

@@ -6,18 +6,20 @@ import Foreground from "./Components/Foreground/Foreground";
 import StakePanel from "./Components/StakePanel/StakePanel";
 import WinningsPanel from "./Components/WinningsPanel/WinningsPanel";
 import RevealAllPanel from "./Components/RevealAllPanel/RevealAllPanel";
+import revealAllPanel from "./Components/RevealAllPanel/RevealAllPanel";
+import WinUpToPanel from "./Components/WinUpToPanel/WinUpToPanel";
 
 import settings from './app.json';
-import revealAllPanel from "./Components/RevealAllPanel/RevealAllPanel";
 
 export class Game {
     private _stake: number = 1;
     private _credit: number = 10;
 
-    private _stakePanel: StakePanel = null;
-    private _winningsPanel: WinningsPanel = null;
-    private _symbolManager: SymbolManager = null;
-    private _revealAllPanel: revealAllPanel = null;
+    private readonly _stakePanel: StakePanel = null;
+    private readonly _winningsPanel: WinningsPanel = null;
+    private readonly _symbolManager: SymbolManager = null;
+    private readonly _revealAllPanel: revealAllPanel = null;
+    private readonly _winUpToPanel: WinUpToPanel = null;
 
     constructor() {
         const background = new Background();
@@ -28,10 +30,14 @@ export class Game {
         this._symbolManager = new SymbolManager();
         this._revealAllPanel = new RevealAllPanel(this);
 
+        const largestWinValue = Math.max(...settings.prizeTable);
+        this._winUpToPanel = new WinUpToPanel(largestWinValue);
+
         global.app.stage.addChild(
             background,
             this._symbolManager,
             foreground,
+            this._winUpToPanel,
             this._stakePanel,
             this._revealAllPanel,
             this._winningsPanel
@@ -65,7 +71,7 @@ export class Game {
         // close all chests
         this._symbolManager.prepareAllSymbols();
 
-        await this._revealAllPanel.show();
+        void this._revealAllPanel.show();
 
         // const data = generateResults();
 

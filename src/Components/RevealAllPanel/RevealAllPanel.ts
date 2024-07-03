@@ -20,9 +20,15 @@ class RevealAllPanel extends Container {
         const panelBackground = Sprite.from(global.game.ui.textures['panelRevealAll.png']);
 
         this._revealButton = new Button(()=> {this._onRevealAllButtonPressed()}, {
-            active: {texture: global.game.language.textures['revealAllButton.psd']},
-            pressed: {texture: global.game.language.textures['revealAllButton.psd']},
-            inactive: {texture: global.game.language.textures['revealAllButton.psd']}
+            buttonText: "REVEAL ALL",
+            textStyle: {
+                fontName: 'skranji-white-interface-export',
+                fontSize: 32,
+                align: 'center',
+            },
+            active: {texture: global.game.ui.textures['buttonBackground.png']},
+            pressed: {texture: global.game.ui.textures['buttonLighten.png']},
+            inactive: {texture: global.game.ui.textures['buttonDarken.png']}
         });
         this._revealButton.x = 12;
         this._revealButton.y = 370;

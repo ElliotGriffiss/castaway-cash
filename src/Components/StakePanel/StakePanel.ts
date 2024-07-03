@@ -82,9 +82,15 @@ class StakePanel extends Container{
         panelBackgroundBottom.y = 420;
 
         this._playButton = new Button(()=> {this._onPlayButtonPressed()}, {
-            active: {texture: global.game.language.textures['playButton.psd']},
-            pressed: {texture: global.game.language.textures['playButton.psd']},
-            inactive: {texture: global.game.language.textures['playButton.psd']}
+            buttonText: "PLAY",
+            textStyle: {
+                fontName: 'skranji-white-interface-export',
+                fontSize: 46,
+                align: 'center',
+            },
+            active: {texture: global.game.ui.textures['buttonBackground.png']},
+            pressed: {texture: global.game.ui.textures['buttonLighten.png']},
+            inactive: {texture: global.game.ui.textures['buttonDarken.png']}
         });
         this._playButton.x = 60;
         this._playButton.y = 455;

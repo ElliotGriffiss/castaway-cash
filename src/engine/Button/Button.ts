@@ -8,7 +8,8 @@ type SpriteSettings = {
 
 type buttonSettings = {
     hideActive?: boolean;
-    textStyle?: IBitmapTextStyle,
+    buttonText?: string;
+    textStyle?: Partial<IBitmapTextStyle>,
     active?: SpriteSettings;
     pressed?: SpriteSettings;
     inactive?: SpriteSettings;
@@ -17,6 +18,7 @@ type buttonSettings = {
 class Button extends Container {
     private _isActive: boolean = true;
 
+    private readonly _buttonText: BitmapText;
     private readonly _activeSprite: Sprite;
     private readonly _pressedSprite : Sprite;
     private readonly _inactiveSprite: Sprite;
@@ -51,6 +53,16 @@ class Button extends Container {
         this._inactiveSprite.visible = false;
 
         this.addChild(this._activeSprite, this._pressedSprite, this._inactiveSprite);
+
+        if (constructor.buttonText) {
+            this._buttonText = new BitmapText(constructor.buttonText, constructor.textStyle);
+            this._buttonText.anchor.x = 0.5;
+            this._buttonText.anchor.y = 0.65;
+            this._buttonText.x = this.width / 2;
+            this._buttonText.y = this.height / 2;
+
+            this.addChild(this._buttonText);
+        }
 
         this.on("pointerup", this._onButtonReleased, this);
         this.on("pointerdown", this._onButtonPressed, this);

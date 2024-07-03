@@ -38,7 +38,11 @@ class Foreground extends Container {
         logo.y = -170;
         logo.anchor.x = 0.5;
 
-        this.addChild(bushesL, bushesR, parmL, parmR, logo);
+        const instructionsSprite = Sprite.from(global.game.language.textures['instructionGame01.psd']);
+        instructionsSprite.x = 65;
+        instructionsSprite.y = 800;
+
+        this.addChild(bushesL, bushesR, parmL, parmR, logo, instructionsSprite);
     }
 
 }
