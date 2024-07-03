@@ -5,8 +5,10 @@ import Background from "./Components/Background/Background";
 import Foreground from "./Components/Foreground/Foreground";
 import StakePanel from "./Components/StakePanel/StakePanel";
 import WinningsPanel from "./Components/WinningsPanel/WinningsPanel";
+import RevealAllPanel from "./Components/RevealAllPanel/RevealAllPanel";
 
 import settings from './app.json';
+import revealAllPanel from "./Components/RevealAllPanel/RevealAllPanel";
 
 export class Game {
     private _stake: number = 1;
@@ -15,6 +17,7 @@ export class Game {
     private _stakePanel: StakePanel = null;
     private _winningsPanel: WinningsPanel = null;
     private _symbolManager: SymbolManager = null;
+    private _revealAllPanel: revealAllPanel = null;
 
     constructor() {
         const background = new Background();
@@ -23,14 +26,18 @@ export class Game {
         this._stakePanel = new StakePanel(this, settings.stakes);
         this._winningsPanel = new WinningsPanel(this);
         this._symbolManager = new SymbolManager();
+        this._revealAllPanel = new RevealAllPanel(this);
 
         global.app.stage.addChild(
             background,
             this._symbolManager,
             foreground,
             this._stakePanel,
+            this._revealAllPanel,
             this._winningsPanel
         );
+
+        void this._stakePanel.show();
     }
 
     updateStake(currentStake: number): void {
@@ -38,7 +45,7 @@ export class Game {
     }
 
     onChangeBetButtonPressed(): void {
-        this._stakePanel.visible = true;
+        void this._stakePanel.show();
         this._winningsPanel.visible = false;
     }
 
@@ -51,8 +58,6 @@ export class Game {
     }
 
     async _playGame(): Promise<void> {
-        this._symbolManager.prepareAllSymbols();
-
         // deduct credit;
         this._credit -= this._stake;
         this._winningsPanel.visible = false;
@@ -60,13 +65,14 @@ export class Game {
         // close all chests
         this._symbolManager.prepareAllSymbols();
 
+        await this._revealAllPanel.show();
+
         // const data = generateResults();
 
         await this._symbolManager.updateSymbols([20, 12, 8, 6, 6, 2, 2, 1, 1]);
 
-        // display win panel
-        this._winningsPanel.visible = true;
-
+        this._revealAllPanel.visible = false;
+        await this._winningsPanel.show();
 
         return Promise.resolve()
     }

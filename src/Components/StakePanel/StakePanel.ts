@@ -1,4 +1,5 @@
 import {Container, Sprite, BitmapText} from "pixi.js";
+import gsap from 'gsap';
 
 import Game from "../../Game";
 import Button from "../../engine/Button/Button"
@@ -9,6 +10,8 @@ class StakePanel extends Container{
     private readonly _increaseStakeButton: Button = null;
     private readonly _decreaseStakeButton: Button = null;
     private readonly _playButton: Button = null;
+
+    private readonly _showTween: gsap.core.Tween = null;
 
     private readonly _stakes: number[] = null;
     private _currentStakeIndex: number = 0;
@@ -33,21 +36,44 @@ class StakePanel extends Container{
             fontSize: 60,
             align: 'center',
         });
-        this._stakeText.x = 120;
+        this._stakeText.anchor.x = 0.5;
+        this._stakeText.x = 175;
         this._stakeText.y = 220;
 
         this._increaseStakeButton = new Button(()=> {this._increaseStake()}, {
-            active: global.game.ui.textures['plus.png'],
-            pressed: global.game.ui.textures['plusHighlight.png'],
-            inactive: global.game.ui.textures['plusShadow.png']
+            hideActive: true,
+            active: {
+                texture: global.game.ui.textures['plus.png'],
+            },
+            pressed: {
+                texture: global.game.ui.textures['plusHighlight.png'],
+                x: 5,
+                y: 5
+            },
+            inactive: {
+                texture: global.game.ui.textures['plusShadow.png'],
+                x: 5,
+                y: 5
+            }
         });
         this._increaseStakeButton.x = 215
         this._increaseStakeButton.y = 290;
 
         this._decreaseStakeButton = new Button(()=> {this._decreaseStake()}, {
-            active: global.game.ui.textures['minus.png'],
-            pressed: global.game.ui.textures['minusHighlight.png'],
-            inactive: global.game.ui.textures['minusShadow.png']
+            hideActive: true,
+            active: {
+                texture: global.game.ui.textures['minus.png'],
+            },
+            pressed: {
+                texture: global.game.ui.textures['minusHighlight.png'],
+                x: 5,
+                y: 5
+            },
+            inactive: {
+                texture: global.game.ui.textures['minusShadow.png'],
+                x: 5,
+                y: 5
+            }
         });
         this._decreaseStakeButton.x = 25;
         this._decreaseStakeButton.y = 325;
@@ -56,12 +82,14 @@ class StakePanel extends Container{
         panelBackgroundBottom.y = 420;
 
         this._playButton = new Button(()=> {this._onPlayButtonPressed()}, {
-            active: global.game.language.textures['playButton.psd'],
-            pressed: global.game.language.textures['playButton.psd'],
-            inactive: global.game.language.textures['playButton.psd']
+            active: {texture: global.game.language.textures['playButton.psd']},
+            pressed: {texture: global.game.language.textures['playButton.psd']},
+            inactive: {texture: global.game.language.textures['playButton.psd']}
         });
         this._playButton.x = 60;
         this._playButton.y = 455;
+
+        this._showTween = gsap.fromTo(this, {pixi: {positionX: -360}}, {pixi: {positionX: 0}, duration: 0.75, ease: "sine.out", paused: true});
 
         this.addChild(
             panelBackgroundTop,
@@ -73,6 +101,12 @@ class StakePanel extends Container{
             this._decreaseStakeButton,
             this._playButton
         );
+    }
+
+    async show(): Promise<void> {
+        this.visible = true;
+        await this._showTween.restart();
+        return Promise.resolve();
     }
 
     private _increaseStake(): void {

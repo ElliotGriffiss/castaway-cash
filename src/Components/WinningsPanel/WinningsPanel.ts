@@ -1,4 +1,6 @@
 import { Container, Sprite, BitmapText } from 'pixi.js';
+import gsap from 'gsap';
+
 import Button from "../../engine/Button/Button";
 import Game from "../../Game";
 
@@ -6,6 +8,8 @@ class WinningsPanel extends Container {
     private readonly _winAmountText: BitmapText = null;
     private readonly _playButton: Button = null;
     private readonly _setBetButton: Button = null;
+
+    private readonly _showTween: gsap.core.Tween = null;
 
     private _game: Game = null;
 
@@ -31,22 +35,30 @@ class WinningsPanel extends Container {
         this._winAmountText.y = 120;
 
         this._playButton = new Button(()=> {this._onPlayButtonPressed()}, {
-            active: global.game.language.textures['playButton.psd'],
-            pressed: global.game.language.textures['playButton.psd'],
-            inactive: global.game.language.textures['playButton.psd']
+            active: {texture: global.game.language.textures['playButton.psd']},
+            pressed: {texture: global.game.language.textures['playButton.psd']},
+            inactive: {texture: global.game.language.textures['playButton.psd']}
         });
         this._playButton.x = 420;
         this._playButton.y = 190;
 
         this._setBetButton = new Button(()=> {this._onSetBetButtonPressed()}, {
-            active: global.game.language.textures['changeBetButton.psd'],
-            pressed: global.game.language.textures['changeBetButton.psd'],
-            inactive: global.game.language.textures['changeBetButton.psd']
+            active: {texture: global.game.language.textures['changeBetButton.psd']},
+            pressed: {texture: global.game.language.textures['changeBetButton.psd']},
+            inactive: {texture: global.game.language.textures['changeBetButton.psd']}
         });
         this._setBetButton.x = 690;
         this._setBetButton.y = 190;
 
+        this._showTween = gsap.fromTo(this, {pixi: {positionY: -300}}, {pixi: {positionY: 0}, duration: 0.75, ease: "sine.out", paused: true});
+
         this.addChild(backgroundSprite, winMessageSprite, this._winAmountText, this._playButton, this._setBetButton);
+    }
+
+    async show(): Promise<void> {
+        this.visible = true;
+        await this._showTween.restart();
+        return Promise.resolve();
     }
 
     setWinAmount(amountWon: number): void {

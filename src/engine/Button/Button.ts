@@ -1,9 +1,17 @@
-import {Container, Sprite, Texture} from 'pixi.js';
+import {Container, Sprite, Texture, BitmapText, IBitmapTextStyle} from 'pixi.js';
+
+type SpriteSettings = {
+    texture?: Texture;
+    x?: number;
+    y?: number;
+}
 
 type buttonSettings = {
-    active?: Texture;
-    pressed?: Texture;
-    inactive?: Texture;
+    hideActive?: boolean;
+    textStyle?: IBitmapTextStyle,
+    active?: SpriteSettings;
+    pressed?: SpriteSettings;
+    inactive?: SpriteSettings;
 }
 
 class Button extends Container {
@@ -14,17 +22,27 @@ class Button extends Container {
     private readonly _inactiveSprite: Sprite;
 
     private readonly _buttonPayload: () => void;
+    private readonly _buttonSettings: buttonSettings = null;
 
     constructor(buttonPayload:() => void, constructor: buttonSettings) {
         super();
         this._buttonPayload = buttonPayload;
+        this._buttonSettings = constructor;
 
         this.x = 292;
         this.y = 254;
 
-        this._activeSprite = Sprite.from(constructor.active);
-        this._pressedSprite = Sprite.from(constructor.pressed);
-        this._inactiveSprite = Sprite.from(constructor.inactive);
+        this._activeSprite = Sprite.from(constructor.active.texture);
+        this._activeSprite.x = constructor.active.x ?? 0;
+        this._activeSprite.y = constructor.active.y ?? 0;
+
+        this._pressedSprite = Sprite.from(constructor.pressed.texture);
+        this._pressedSprite.x = constructor.pressed.x ?? 0;
+        this._pressedSprite.y = constructor.pressed.y ?? 0;
+
+        this._inactiveSprite = Sprite.from(constructor.inactive.texture);
+        this._inactiveSprite.x = constructor.inactive.x ?? 0;
+        this._inactiveSprite.y = constructor.inactive.y ?? 0;
 
         this.eventMode = 'static';
         this.cursor = 'Pointer';
@@ -42,7 +60,10 @@ class Button extends Container {
     set isActive(active: boolean) {
         this._isActive = active;
 
-        this._activeSprite.visible = active;
+        if (!this._buttonSettings.hideActive) {
+            this._activeSprite.visible = active;
+        }
+
         this._inactiveSprite.visible = !active;
 
         (this._isActive) ? this.cursor = 'Pointer' : this.cursor = 'default';
@@ -58,7 +79,10 @@ class Button extends Container {
 
     private _onButtonPressed(): void {
         if (this._isActive) {
-            this._activeSprite.visible = false;
+            if (!this._buttonSettings.hideActive) {
+                this._activeSprite.visible = false;
+            }
+
             this._pressedSprite.visible = true;
         }
     }

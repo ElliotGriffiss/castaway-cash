@@ -7,7 +7,7 @@ class Foreground extends Container {
 
         const bushesL = Sprite.from(global.game.backgroundElements.textures['bushesL.png']);
         bushesL.x = 306;
-        bushesL.y = 970;
+        bushesL.y = 1005;
         bushesL.anchor.x = 1;
         bushesL.anchor.y = 1;
         bushesL.scale.x = 1.5;

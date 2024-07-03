@@ -8,8 +8,8 @@ class SymbolManager extends Container {
     constructor() {
         super();
 
-        this._symbols = settings.symbolPositions.map(({x, y, rotation}) => {
-            const symbol = new Symbol(x, y, rotation)
+        this._symbols = settings.symbolPositions.map(({x, y, angle}) => {
+            const symbol = new Symbol(x, y, angle)
             this.addChild(symbol);
             return symbol;
         })
@@ -29,7 +29,7 @@ class SymbolManager extends Container {
 
     async updateSymbols(values: number[]): Promise<void> {
         await Promise.all( this._symbols.map((symbol, index) => {
-            return symbol.setupSymbol(values[index], false);
+            return symbol.setupSymbol(values[index], true);
         }));
     }
 }
